@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
-import VideoListItems from './video_list_item'
+import React from "react";
+import VideoListItem from "./video_list_item";
 
-export default class VideoList extends Component {
+const VideoList = props => {
+  const videoItems = props.videos.map(video => {
+    return (
+      <VideoListItem
+        onVideoSelect={props.onVideoSelect}
+        key={video.etag}
+        video={video}
+      />
+    );
+  });
 
-	render() {
+  return <ul className="col-md-4 list-group">{videoItems}</ul>;
+};
 
-		const items = this.props.videos.map((videos) => {
-			return <VideoListItems 
-				videos={videos}
-				key={videos.id}
-			/>
-		})
-
-		return <ul>
-		{items}
-		</ul>
-	}
-}
+export default VideoList;

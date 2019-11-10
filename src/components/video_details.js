@@ -1,21 +1,25 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import 'semantic-ui-css/semantic.min.css'
-import { Header } from 'semantic-ui-react'
+import React from "react";
 
-export default class VideoDetails extends Component {
-	render() {
-		if(this.props.currentVideo === undefined) {
-			return <div>Loading...</div>
-		}
-		const videoId = this.props.currentVideo.id
-		const url = `https://www.youtube.com/embed/${videoId}`
+// We do not need props but the video property og props
+const VideoDetail = ({ video }) => {
+  if (!video) {
+    return <div>Loading...</div>;
+  }
 
-		return <div>
-			<iframe src={url}>
-			</iframe>
-			<Header as='h3'>{this.props.currentVideo.title}</Header>
-			<Header as='h4'>{this.props.currentVideo.title}</Header>
-		</div>
-	}
-}
+  const videoId = video.id.videoId;
+  const url = `https://www.youtube.com/embed/${videoId}`;
+
+  return (
+    <div className="video-detail col-md-8">
+      <div className="embed-responsive embed-responsive-16by9">
+        <iframe className="embed-responsive-item" src={url}></iframe>
+      </div>
+      <div className="details">
+        <div>{video.snippet.title}</div>
+        <div>{video.snippet.description}</div>
+      </div>
+    </div>
+  );
+};
+
+export default VideoDetail;
